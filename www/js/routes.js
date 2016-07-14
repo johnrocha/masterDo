@@ -27,7 +27,17 @@ angular.module('app.routes', [])
 
 
   .state('menu.listaDetalhes', {
-    url: '/minhas-listas/id',
+    url: '/minhas-listas/:listaId',
+    //                   ^^^^^^^^
+    // :listaId é "variável" que estará disponível dentro do controller
+    //    e será preenchida com o que estiver depois de "/minhas-listas/" 
+    // Exemplo:
+    //  /minhas-listas/123                        => o valor de listaId será "123"
+    //  /minhas-listas/asdf/fasda/fasd            => o valor de listaId será "asdf/fasda/fasd"
+    //  /minhas-listas/qqr/coisa.que/vier.depois  => o valor de listaId será "qqr/coisa.que/vier.depois"
+    // 
+    // A gente vai usar para passar o _id da lista que queremos mostrar os detalhes.
+    // Ver "ListaDetalhesCtrl" dentro de controller.js
     views: {
       'side-menu21': {
         templateUrl: 'templates/listaDetalhes.html',
