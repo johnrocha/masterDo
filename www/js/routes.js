@@ -10,7 +10,7 @@ angular.module('app.routes', [])
     
   
 
-      .state('menu.minhasListas', {
+  .state('menu.minhasListas', {
     url: '/minhas-listas',
     views: {
       'side-menu21': {
@@ -18,12 +18,6 @@ angular.module('app.routes', [])
         controller: 'minhasListasCtrl'
       }
     }
-  })
-
-  .state('cart', {
-    url: '/page2',
-    templateUrl: 'templates/cart.html',
-    controller: 'cartCtrl'
   })
 
   .state('menu', {

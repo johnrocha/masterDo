@@ -4,10 +4,6 @@ angular.module('app.controllers', [])
 
 })
    
-.controller('cartCtrl', function($scope) {
-
-})
-      
 .controller('nomeDaListaCtrl', function($scope) {
 
 })
