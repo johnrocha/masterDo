@@ -18,8 +18,8 @@ angular.module('app.services', [])
   // Esse nome é que vc vai usar como parâmetro nos seus controllers
 
   var arrayInternoDeListasDeTarefas = [
-      { _id: '1', name: 'Lista de compras 1' },
-      { _id: '2', name: 'Lista de compras 2' },
+      { _id: '1', nome: 'Lista de compras 1' },
+      { _id: '2', nome: 'Lista de compras 2' },
     ]
 
   var GerenciadorDeListasDeTarefas = {
