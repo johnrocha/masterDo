@@ -13,12 +13,31 @@
 
         </ion-list>
         <div class="spacer" style="width: 300px; height: 43px;"></div>
-        <form id="minhasListas-form1" class="list ">
+
+
+        <form 
+          id="minhasListas-form1"
+          class="list" 
+          ng-controller="NovaListaCtrl" 
+          ng-submit="criarNovaLista();">
+          <!-- 
+            ng-controller pode ser definido fora de um "state". Aqui estamos definindo um controller só
+            para tratar o form de criação de nova Lista. 
+
+            A função "criarNovaLista()" está definida em NovaListaCtrl!
+            Ver controllers.js linha 18
+           -->
+
             <label class="item item-input " id="minhasListas-input1">
-                <span class="input-label">Nova lista</span>
-                <input type="text" placeholder="Digite o nome da lista">
+              <span class="input-label">Nova lista</span>
+              <input type="text" placeholder="Digite o nome da lista" ng-model="novaListaDeTarefas.nome">
+              <!--                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                                      Lembram disso, né?!
+              -->
+
             </label>
             <button id="minhasListas-button1" class=" button button-royal  button-block icon-right ion-android-add ">Criar lista</button>
         </form>
+
     </ion-content>
 </ion-view>

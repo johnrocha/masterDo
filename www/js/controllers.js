@@ -9,9 +9,17 @@ angular.module('app.controllers', [])
   var idDaLista = $stateParams.listaId;
   var listaDeTarefas = GerenciadorDeListasDeTarefas.buscarPorId(idDaLista);
 
-  // Torna a lista de tarefas que encontramos pelo id disponível para o HTML
   $scope.lista = listaDeTarefas;
 
   console.log("Lista de tarefas encontrada: ", listaDeTarefas);
 })
- 
+
+
+.controller('NovaListaCtrl', function($scope, GerenciadorDeListasDeTarefas) {
+  $scope.novaListaDeTarefas = {};
+
+  $scope.criarNovaLista = function() {
+    GerenciadorDeListasDeTarefas.criarNovaListaDeTarefa( $scope.novaListaDeTarefas );
+    $scope.novaListaDeTarefas = {}; // limpar o objeto para permitir nova adição (vai limpar o form ;)
+  }
+})

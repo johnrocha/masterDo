@@ -40,6 +40,18 @@ angular.module('app.services', [])
       }
 
       return listaDeTarefaEncontrada;
+    },
+
+    criarNovaListaDeTarefa: function(novaListaDeTarefa) {
+      // Geramos um número aleatório de 3 dígitos e o definimos como _id do nosso novo objeto.
+      // Preciamos disso pq é a partir do _id que buscamos a Lista De Tarefas que queremos mostrar 
+      //   os detalhes. Se não tiver _id não o encontramos!
+      // 
+      // (isso é provisório. Esse _id vai ser gerado pelo MongoDB e não precimos nos preocupar ;)
+      novaListaDeTarefa._id = Math.floor(Math.random() * 1000).toString();
+
+      // adiciona no array interno o objeto ListaDeTarefa recebido.
+      arrayInternoDeListasDeTarefas.push(novaListaDeTarefa);
     }
 
   };
