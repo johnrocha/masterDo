@@ -1,12 +1,12 @@
 <ion-view title="Minhas Listas" id="page1" style="background-color:#FFFFFF;" class=" ">
     <ion-content padding="true" class="has-header">
         <ion-list id="minhasListas-list1" class=" manual-list-fullwidth ">
-            <ion-item class="item-icon-right  " id="minhasListas-list-item4" ui-sref="menu.listaDetalhes">Lista de compras
-                <i class="icon ion-ios-arrow-right"></i>
+
+            <ion-item class="item-icon-right" ng id="minhasListas-list-item4" ui-sref="menu.listaDetalhes" ng-repeat="item in minhasListas">
+              {{ item.name }}
+              <i class="icon ion-ios-arrow-right"></i>
             </ion-item>
-            <ion-item class="item-icon-right  " id="minhasListas-list-item5">Coisas para fazer depois do almoço
-                <i class="icon ion-ios-arrow-right"></i>
-            </ion-item>
+
         </ion-list>
         <div class="spacer" style="width: 300px; height: 43px;"></div>
         <form id="minhasListas-form1" class="list ">
