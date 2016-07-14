@@ -1,10 +1,10 @@
 angular.module('app.controllers', [])
   
-.controller('minhasListasCtrl', function($scope) {
+.controller('MinhasListasCtrl', function($scope) {
 
 })
    
-.controller('nomeDaListaCtrl', function($scope) {
+.controller('ListaDetalhesCtrl', function($scope) {
 
 })
  

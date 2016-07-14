@@ -8,6 +8,11 @@ angular.module('app.routes', [])
   // Each state's controller can be found in controllers.js
   $stateProvider
     
+  .state('menu', {
+    url: '/side-menu21',
+    templateUrl: 'templates/menu.html',
+    abstract:true
+  })
   
 
   .state('menu.minhasListas', {
@@ -15,23 +20,18 @@ angular.module('app.routes', [])
     views: {
       'side-menu21': {
         templateUrl: 'templates/minhasListas.html',
-        controller: 'minhasListasCtrl'
+        controller: 'MinhasListasCtrl'
       }
     }
   })
 
-  .state('menu', {
-    url: '/side-menu21',
-    templateUrl: 'templates/menu.html',
-    abstract:true
-  })
 
-  .state('menu.nomeDaLista', {
+  .state('menu.listaDetalhes', {
     url: '/minhas-listas/id',
     views: {
       'side-menu21': {
-        templateUrl: 'templates/nomeDaLista.html',
-        controller: 'nomeDaListaCtrl'
+        templateUrl: 'templates/listaDetalhes.html',
+        controller: 'ListaDetalhesCtrl'
       }
     }
   })
