@@ -7,17 +7,6 @@
               id="minhasListas-list-item4"
               ng-repeat="item in minhasListas" 
               ui-sref="menu.listaDetalhes({ listaId: item._id })">
-              <!--                         ^^^^^^^^^^^^^^^^^^^
-               Aqui a gente tá dizendo para o Ionic construir o link substituindo o ":listaId" pelo 
-               valor que "_id" de cada item.
-
-               Exemplo:
-                 Para a Lista { _id: '1', name: 'Lista de compras 1' },  o ui-sref="menu.listaDetalhes({ listaId: item._id })" vai gerar a url: "/minhas-listas/1".
-
-                Ver controller.js, linha 12
-                Ver routes.js, linha 30
-
-               -->
               {{ item.name }}
               <i class="icon ion-ios-arrow-right"></i>
             </ion-item>

@@ -1,24 +1,17 @@
 angular.module('app.controllers', [])
   
-.controller('MinhasListasCtrl', function($scope) {
-  $scope.minhasListas = [
-    { _id: '1', name: 'Lista de compras 1' },
-    { _id: '2', name: 'Lista de compras 2' },
-  ];
-
+.controller('MinhasListasCtrl', function($scope, GerenciadorDeListasDeTarefas) {
+  $scope.minhasListas = GerenciadorDeListasDeTarefas.buscarTodas()
 
 })
    
-.controller('ListaDetalhesCtrl', function($scope, $stateParams) {
-  //                                              ^^^^^^^^^^^^
-  // $stateParams é um objeto que guarda os rótulos que vc definiu com ":" na definição de rota.
-  //  Hein!??! Explico:
-  // Na linha 30 de routes.js a gente definiu a rota "/minhas-listas/:listaId", não foi?
-  // Quando a url "/minhas-listas/123" for acessada o $stateParams.listaId vai retornar o valor "123"!
-  // Fácil, né não?! ;)
-
+.controller('ListaDetalhesCtrl', function($scope, $stateParams, GerenciadorDeListasDeTarefas) {
   var idDaLista = $stateParams.listaId;
-  // A gente vai usar esse "idDaLista" para recuperar a lista que queremos exibir os detalhes.
+  var listaDeTarefas = GerenciadorDeListasDeTarefas.buscarPorId(idDaLista);
 
+  // Torna a lista de tarefas que encontramos pelo id disponível para o HTML
+  $scope.lista = listaDeTarefas;
+
+  console.log("Lista de tarefas encontrada: ", listaDeTarefas);
 })
  
