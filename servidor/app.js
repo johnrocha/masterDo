@@ -1,12 +1,3 @@
-// 
-// Nosso esqueleto do sistema servidor. Já vimos isso várias vezes, né?!
-// Aqui tem o código do Hello World do Express (http://expressjs.com/pt-br/starter/hello-world.html)
-//  mais o BodyParser para gente receber JSON do cliente
-//  mais o driver do MongoDB para conectar com o Servidor De Banco de Dados
-// 
-// Vejam que o sistema ainda não faz  "nada" de útil, apenas inicializa o framework e declara
-//  algumas coisas que vamos usar já já. Notem, tbm, que só temos um única rota: /, que retorna a string "Olá mundo!"
-// 
 // Links:
 //  http://expressjs.com/pt-br/starter/hello-world.html
 //  https://docs.mongodb.com/ecosystem/drivers/node-js/
@@ -29,11 +20,40 @@ var ObjectId    = require('mongodb').ObjectID;
 
 var url = 'mongodb://localhost:27017/masterDo-db';
 
-// Depois de "subir" o servidor (node app.js), acesse http://localhost:3000/ no navegador
-//  e vc vai ver a string "Olá mundo!"
 // 
-// Ou seja, tudo certo! Ambiente preparado corretamente. :D
+// Aqui estamos criando uma rota GET para "/lista-de-tarefas/carregar-todas"
+// A ação esperada aqui fazer um conexão com o BD e carregar de lá todos os documentos de ListaDeTarefas
+//  e mandar de volta pro cliente (nosso app!) como JSON
 // 
+// Lembra que, _na prática_, Objeto javascript, JSON e Documento no MongoDB é praticamente a mesma coisa.
+// Todos são representações da minha Lista De Tarefas em cada ambiente. ;)
+// 
+app.get('/lista-de-tarefas/carregar-todas', function(req, res) {
+  // Quando um request GET para /lista-de-tarefas/carregar-todas acontecer...
+
+  // ... chamo a função para conectar ao Banco de Dados...
+  MongoClient.connect(url, function(err, db) {
+    // ... quando conectar ...
+
+    // ... busco por todos os registros (ou seja, todo os Documentos!) na coleção "lista_de_tarefas"...
+    var documentos = db.collection('listas_de_tarefas').find();
+
+    // ... transformo os documentos em um array de Objetos Javascript ...
+    documentos.toArray(function(err, results) {
+      // ... e mando-os de volta como JSON!
+      res.json(results);
+
+      // (e fecho a conexão com o BD)
+      db.close();
+    })
+
+
+  });
+  // facinho, né não? :)
+  
+})
+
+
 app.get('/', function(req, res) {
   res.send('Olá mundo!')
 })
