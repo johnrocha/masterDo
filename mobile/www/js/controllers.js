@@ -1,6 +1,8 @@
 angular.module('app.controllers', [])
   
 .controller('MinhasListasCtrl', function($scope, GerenciadorDeListasDeTarefas) {
+  $scope.minhasListas = [];
+
   // Mando buscar todos...
   GerenciadorDeListasDeTarefas.buscarTodas().then(function(respostaDoServidor) {
     // ... quando chegar, jogo em $scope para poder aparecer no HTML!
@@ -11,11 +13,11 @@ angular.module('app.controllers', [])
    
 .controller('ListaDetalhesCtrl', function($scope, $stateParams, GerenciadorDeListasDeTarefas) {
   var idDaLista = $stateParams.listaId;
-  var listaDeTarefas = GerenciadorDeListasDeTarefas.buscarPorId(idDaLista);
 
-  $scope.lista = listaDeTarefas;
+  GerenciadorDeListasDeTarefas.buscarPorId(idDaLista).then(function(respostaDoServidor) {
+    $scope.lista = respostaDoServidor.data;
+  });
 
-  console.log("Lista de tarefas encontrada: ", listaDeTarefas);
 })
 
 
@@ -23,7 +25,11 @@ angular.module('app.controllers', [])
   $scope.novaListaDeTarefas = {};
 
   $scope.criarNovaLista = function() {
-    GerenciadorDeListasDeTarefas.criarNovaListaDeTarefa( $scope.novaListaDeTarefas );
-    $scope.novaListaDeTarefas = {}; // limpar o objeto para permitir nova adição (vai limpar o form ;)
+    GerenciadorDeListasDeTarefas.criarNovaListaDeTarefa( $scope.novaListaDeTarefas ).then(function(respostaDoServidor) {
+      // Aqui o objeto está, de fato, inserido no BD pelo servidor.
+      // Agora posso add no meu array local, pq ele vai ter o _id preenchido
+      $scope.minhasListas.push(respostaDoServidor.data);
+      $scope.novaListaDeTarefas = {}; // limpar o objeto para permitir nova adição (vai limpar o form ;)
+    })
   }
 })

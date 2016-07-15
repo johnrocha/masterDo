@@ -39,8 +39,16 @@ angular.module('app.services', [])
       return $http.get(url);
     },
 
-    // Por questão de foco, tirei PROVISORIAMENTE as outras funções.
-    // Um coisa de cada vez, jovem gafanhoto, uma coisa de cada vez...
+    criarNovaListaDeTarefa: function(listaDeTarefa) {
+      var url = 'http://localhost:3000/lista-de-tarefas/criar';
+      return $http.post(url, listaDeTarefa);
+    },
+
+    buscarPorId: function(idQueQueroBuscar) {
+      var url = 'http://localhost:3000/lista-de-tarefas/buscar-por-id?id=' + idQueQueroBuscar;
+      return $http.get(url);
+    }
+
   };
 
   return GerenciadorDeListasDeTarefas;

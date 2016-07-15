@@ -61,6 +61,40 @@ app.get('/lista-de-tarefas/carregar-todas', function(req, res) {
   
 })
 
+app.get('/lista-de-tarefas/buscar-por-id', function(req, res) {
+  var id = req.query.id;
+
+
+  MongoClient.connect(url, function(err, db) {
+
+    var documentos = db.collection('listas_de_tarefas').find({ _id: ObjectId(id) });
+
+    documentos.toArray(function(err, results) {
+      res.json(results[0]);
+
+      db.close();
+    })
+
+
+  });
+  // facinho, né não? :)
+  
+})
+
+app.post('/lista-de-tarefas/criar', function(req, res) {
+  var listaDeTarefas = req.body;
+
+  MongoClient.connect(url, function(err, db) { 
+
+    db.collection('listas_de_tarefas').insert(listaDeTarefas, function(err, documentosInseridos) {
+      // retorna como JSON o documento inserido. Ele vai ter o _id que vamos precisar lá no cliente
+      res.json( documentosInseridos.ops[0] );
+    });
+
+  });
+
+});
+
 
 app.get('/', function(req, res) {
   res.send('Olá mundo!')
