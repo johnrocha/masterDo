@@ -1,7 +1,11 @@
 angular.module('app.controllers', [])
   
 .controller('MinhasListasCtrl', function($scope, GerenciadorDeListasDeTarefas) {
-  $scope.minhasListas = GerenciadorDeListasDeTarefas.buscarTodas()
+  // Mando buscar todos...
+  GerenciadorDeListasDeTarefas.buscarTodas().then(function(respostaDoServidor) {
+    // ... quando chegar, jogo em $scope para poder aparecer no HTML!
+    $scope.minhasListas = respostaDoServidor.data;
+  })
 
 })
    

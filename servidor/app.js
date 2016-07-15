@@ -20,6 +20,14 @@ var ObjectId    = require('mongodb').ObjectID;
 
 var url = 'mongodb://localhost:27017/masterDo-db';
 
+// Isso aqui só copie e cola! Confia...
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+
 // 
 // Aqui estamos criando uma rota GET para "/lista-de-tarefas/carregar-todas"
 // A ação esperada aqui fazer um conexão com o BD e carregar de lá todos os documentos de ListaDeTarefas

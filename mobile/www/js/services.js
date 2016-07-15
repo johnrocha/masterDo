@@ -11,49 +11,36 @@ angular.module('app.services', [])
 // 
 // Sacou, né?!
 // 
-// Já já, vai ser aqui que faremos o request para o nosso servidor!
 
-.factory('GerenciadorDeListasDeTarefas', [function(){
-  //      ^^^^^^^^^^^^^^^^^^^
-  // Esse nome é que vc vai usar como parâmetro nos seus controllers
-
-  var arrayInternoDeListasDeTarefas = [
-      { _id: '1', nome: 'Lista de compras 1' },
-      { _id: '2', nome: 'Lista de compras 2' },
-    ]
+.factory('GerenciadorDeListasDeTarefas', ['$http', function($http){
+  //                                              ^^^^^^^
+  // ;)
 
   var GerenciadorDeListasDeTarefas = {
 
+    // Uchôa: Essa função faz um request GET para '/lista-de-tarefas/carregar-todas' e retonar uma coisa
+    //  que vc vai registrar um callback quando a resposta chegar.
+    // Vc: Hein?!!?
+    // Uchôa: Eu mostro, segura a onda aí...
+    //        Assim, ó?!
+    // 
+    // GerenciadorDeListasDeTarefas.buscarTodas().then(function(listaDeTarefasDoServidor) {
+    //   ...
+    // })
+    // 
+    // Sacou aí??
     buscarTodas: function() {
-      return arrayInternoDeListasDeTarefas;
-    },
-
-    buscarPorId: function(idDaListaDeTarefaQueQueroEncontrar) {
-      var listaDeTarefaEncontrada;
-
-      for (var i = 0; i < arrayInternoDeListasDeTarefas.length; i++) {
-
-        var listaDeTarefaDaVez = arrayInternoDeListasDeTarefas[i];
-        if(listaDeTarefaDaVez._id === idDaListaDeTarefaQueQueroEncontrar){
-          listaDeTarefaEncontrada = listaDeTarefaDaVez
-        }
-      }
-
-      return listaDeTarefaEncontrada;
-    },
-
-    criarNovaListaDeTarefa: function(novaListaDeTarefa) {
-      // Geramos um número aleatório de 3 dígitos e o definimos como _id do nosso novo objeto.
-      // Preciamos disso pq é a partir do _id que buscamos a Lista De Tarefas que queremos mostrar 
-      //   os detalhes. Se não tiver _id não o encontramos!
+      var url = 'http://localhost:3000/lista-de-tarefas/carregar-todas';
+      //         ^^^^^^^^^^^^^^^^^^^^^ 
+      //                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       // 
-      // (isso é provisório. Esse _id vai ser gerado pelo MongoDB e não precimos nos preocupar ;)
-      novaListaDeTarefa._id = Math.floor(Math.random() * 1000).toString();
+      // http://localhost:3000 = endereço base do seu sistema Servidor!
+      // /lista-de-tarefas/carregar-todas = rota que vc criou lá em serviro/app.js para retornar um JSON com todas as Lista De Tarefas
+      return $http.get(url);
+    },
 
-      // adiciona no array interno o objeto ListaDeTarefa recebido.
-      arrayInternoDeListasDeTarefas.push(novaListaDeTarefa);
-    }
-
+    // Por questão de foco, tirei PROVISORIAMENTE as outras funções.
+    // Um coisa de cada vez, jovem gafanhoto, uma coisa de cada vez...
   };
 
   return GerenciadorDeListasDeTarefas;
